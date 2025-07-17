@@ -143,13 +143,13 @@ void addpatient() {
 
 void allpatients() {
     FILE *fp = fopen("hdata.txt", "rb");
-    struct Patient p;
-    int count = 0;
-
     if (!fp) {
         printf("No patient records found.\n");
         return;
     }
+
+    struct Patient p;
+    int count = 0;
 
     printf("\n====== All Patient Records ======\n");
 
@@ -178,6 +178,7 @@ void allpatients() {
 
 void searchpatient(){
     int id, found=0;
+
     printf("Enter Patient ID to Search: ");
     scanf("%d", &id);
 
@@ -190,7 +191,7 @@ void searchpatient(){
 
     struct Patient p;
 
-    while (fread(&p, sizeof(struct Patient), 1, fp)) {
+    while (fread(&p, sizeof(p), 1, fp)) {
         if (p.pid == id) {
             found = 1;
             printf("\n--- Patient Found ---\n");
@@ -260,10 +261,11 @@ void updatepatient() {
 
     fclose(fp);
 
-    if (found)
+    if (found){
         printf("Record updated successfully.\n");
-    else
+    }else{
         printf("Patient not found.\n");
+    }
 }
 
 
@@ -271,9 +273,17 @@ void updatepatient() {
 
 void deletepatient(){
     FILE *fp = fopen("hdata.txt", "rb");
+
     FILE *temp = fopen("temp.dat", "wb");
+
+    if (!fp || !temp) {
+        printf("File error.\n");
+        return;
+    }
+
     struct Patient p;
     int id, found = 0;
+
 
     printf("Enter Patient ID to delete: ");
     scanf("%d", &id);
@@ -285,21 +295,33 @@ void deletepatient(){
             found = 1;
         }
     }
-    fclose(fp);
-    fclose(temp);
 
-    remove("hdata.txt");
-    rename("temp.dat", "hdata.txt");
+    if (found) {
+        fclose(fp);
+        fclose(temp);
 
-    if (found)
+        remove("hdata.txt");
+        rename("temp.dat", "hdata.txt");
+
+    } else {
+        fclose(fp);
+        fclose(temp);
+
+        remove("temp.dat");
+    }
+
+
+    if(found){
         printf("Record deleted successfully.\n");
-    else
+    }else{
         printf("Patient not found.\n");
+    }
 }
 
 
 void assigndoctor() {
     FILE *fp = fopen("hdata.txt", "rb+");
+
     struct Patient p;
     int id, found = 0;
 
@@ -319,6 +341,7 @@ void assigndoctor() {
             printf("Enter Doctor's Name to assign: ");
             fgets(p.pdoctor, sizeof(p.pdoctor), stdin);
             strtok(p.pdoctor, "\n");
+
             printf("Enter Discharge Date (DD/MM/YYYY): ");
             fgets(p.pdischaredate, sizeof(p.pdischaredate), stdin);
             strtok(p.pdischaredate, "\n");
@@ -331,8 +354,11 @@ void assigndoctor() {
         }
     }
 
-    if (!found)
-        printf("Patient with ID %d not found.\n", id);
+    if (found){
+        printf("Doctor assigned successfully.\n");
+    }else{
+        printf("Patient not found.\n", id);
+    }
 
     fclose(fp);
 }
