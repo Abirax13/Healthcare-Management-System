@@ -39,10 +39,17 @@ struct addminlogin{
     char passid[30];
 };
 
+struct testmenu{
+    int NO;
+    char testName[30];
+    int testprice;
+};
+
 struct TestResult{
     int patientId;
-    char testName[100];
-    char testResult[200];
+    char testName[50];
+    char testResult[50];
+    int testprice;
 };
 
 struct dapoint{
@@ -90,6 +97,7 @@ void deletedoctor();
 void doctorasignp();
 
 void addpatienttest();
+void addpatienttestresult();
 void viewpatienttests();
 void doctorsappointment();
 void appointmentprescription();
@@ -239,6 +247,8 @@ void Administrator(){
         printf("\t15. View Prescription.\n");
         printf("\t16. Delete Appointment.\n");
         printf("\t17. Add Patient Test.\n");
+        printf("\t18. Add Patient Result\n");
+        printf("\t19. View Patient Test Report.\n");
         printf("\t0. Log Out\n");
         printf("\tEnter your choice: ");
         scanf("%d", &select);
@@ -279,7 +289,10 @@ void Administrator(){
             deleteappointment();
         }else if(select==17){
             addpatienttest();
-            break;
+        }else if(select==18){
+            addpatienttestresult();
+        }else if(select==19){
+            viewpatienttests();
         }else if(select==0){
             return;
         }else{
@@ -297,6 +310,8 @@ void doctorlogin(){
         printf("\t3.  Update Patient\n");
         printf("\t4.  View apointment Patient details.\n");
         printf("\t5.  Pescribe a Patient.\n");
+        printf("\t6.  Add Patient Test.\n");
+        printf("\t7.  View Patient Test Report.\n");
         printf("\t0. Log Out\n");
         printf("\tEnter your choice: ");
         scanf("%d", &select);
@@ -318,6 +333,12 @@ void doctorlogin(){
             case 5:
                 appointmentprescription();
                 break;
+            case 6:
+                addpatienttest();
+                break;
+            case 7:
+                viewpatienttests();
+                break;
             case 0:
                 return;
             default:
@@ -326,58 +347,58 @@ void doctorlogin(){
     }
 }
 
+void addpatienttest();
+void addpatienttestresult();
+void viewpatienttests();
+
 
 void Receptionist(){
     int select;
     while(1){
         printf("\n\t====== Healthcare Management System ======\n\n");
-        printf("\t1. Add New Patient\n");
-        printf("\t2. View All Patients\n");
-        printf("\t3. Search Patient by ID\n");
-        printf("\t4. Update Patient\n");
-        printf("\t5. Delete Patient\n");
-        printf("\t6. Assign Doctor\n");
-        printf("\t7. Add Apointment.\n");
-        printf("\t8. View Prescription.\n");
-        printf("\t9. Delete Appointment.\n");
+        printf("\t1.  Add New Patient\n");
+        printf("\t2.  View All Patients\n");
+        printf("\t3.  Search Patient by ID\n");
+        printf("\t4.  Update Patient\n");
+        printf("\t5.  Delete Patient\n");
+        printf("\t6.  Assign Doctor\n");
+        printf("\t7.  Add Apointment.\n");
+        printf("\t8.  View Prescription.\n");
+        printf("\t9.  Delete Appointment.\n");
+        printf("\t10. Add Test Result.\n");
+        printf("\t11. View Test Report.\n");
         printf("\t0. Log Out\n");
         printf("\tEnter your choice: ");
         scanf("%d", &select);
         getchar();
 
-        switch(select){
-            case 1:
-                addpatient();
-                break;
-            case 2:
-                allpatients();
-                break;
-            case 3:
-                searchpatient();
-                break;
-            case 4:
-                updatepatient();
-                break;
-            case 5:
-                deletepatient();
-                break;
-            case 6:
-                assigndoctor();
-                break;
-            case 7:
-                doctorsappointment();
-                break;
-            case 8:
-                viewprescription();
-                break;
-            case 9:
-                deleteappointment();
-                break;
-            case 0:
-                return;
-            default:
+         if(select==1){
+            addpatient();
+        }else if(select==2){
+            allpatients();
+        }else if(select==3){
+            searchpatient();
+        }else if(select==4){
+            updatepatient();
+        }else if(select==5){
+            deletepatient();
+        }else if(select==6){
+            assigndoctor();
+        }else if(select==7){
+            doctorsappointment();
+        }else if(select==8){
+            viewprescription();
+        }else if(select==9){
+            deleteappointment();
+        }else if(select==10){
+            addpatienttestresult();
+        }else if(select==11){
+            viewpatienttests();
+        }else if(select==0){
+            return;
+        }else{
             printf("\tinvalid selection");
-         }
+        }
     }
 }
 
@@ -1504,164 +1525,463 @@ void doctorasignp() {
     }
 }
 
-// void addpatienttest() {
-//     system("cls");
+void addpatienttest(){
+    system("cls");
 
     
-//     char patientName[150];
-//     int patientId = -1; 
+    int id;
+    int found = 0; 
     
-//     printf("\n\t--- Add New Patient Test Result ---\n\n");
-//     printf("\tEnter Patient Name to find: ");
-//     fgets(patientName, sizeof(patientName), stdin);
-//     strtok(patientName, "\n");
+    printf("\n\t--- Add New Patient Test  ---\n\n");
+    printf("\tEnter Patient ID to find: ");
+    scanf("%d", &id);
+    getchar();
 
-//     FILE *patientFile = fopen("hdata.txt", "r");
-//     if (patientFile == NULL) {
-//         printf("Error: Patient records not found. Cannot add test results.\n");
+    FILE *fileforpatient = fopen("hdata.txt", "r");
+    if (fileforpatient == NULL) {
+        printf("Error: Patient records not found. Cannot add test results.\n");
+        fclose(fileforpatient);
+        exit(1);
+    }
+
+    struct Patient point;
+    char line[1024];
+
+    while (fgets(line, sizeof(line), fileforpatient)) {
+        char *pdata = strtok(line, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        point.pid = atoi(pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pname, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        point.page = atoi(pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pgender, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pphone, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.paddress, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pbloodgroup, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pdisease, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.phistory, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        point.docid = atoi(pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pdoctor, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.padmitdate, pdata);
+
+        pdata = strtok(NULL, "\n");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pdischaredate, pdata);
+
+        if (point.pid == id) {
+            found = 0;
+            printf("\n\t--- Patient Found ---\n");
+            printf("\tID             : %d\n", point.pid);
+            printf("\tName           : %s\n", point.pname);
+            printf("\tAge            : %d\n", point.page);
+            printf("\tGender         : %s\n", point.pgender);
+            printf("\tPhone          : %s\n", point.pphone);
+            printf("\tAddress        : %s\n", point.paddress);
+            printf("\tBlood Group    : %s\n", point.pbloodgroup);
+            printf("\tDoctor         : %s\n", point.pdoctor);
+            break;
+        }
+    }
+
+    if (found) {
+        printf("\tPatient not found. Cannot add test results.\n");
+        fclose(fileforpatient);
+        exit(1);
+    }
+    
+    fclose(fileforpatient);
+
+
+    
+    FILE *testFile = fopen("tdata.txt", "a");
+
+    FILE *testmanual = fopen("testname.txt", "r");
+    if(testmanual == NULL){
         
-//         exit(1);
-//     }
+        printf("Error: Could not open test data file for writing.\n");
+        fclose(testmanual);
+        exit(1);
+    }
 
-//     struct Patient p;
-//     char line[1024];
+    struct testmenu tm;
+    char part[200];
 
-    
-//     while (fgets(line, sizeof(line), patientFile)) {
-//         char *pdata = strtok(line, "|");
-//         if (pdata == NULL) continue;
-//         p.pid = atoi(pdata);
-        
-//         pdata = strtok(NULL, "|");
-//         if (pdata == NULL) continue;
-//         strcpy(p.pname, pdata);
+    printf("\t -----------Test Menu------------\n");
+    printf("\tTest No:\tTest Name:\tTest Price\n");
+    while (fgets(part, sizeof(part), testmanual)) {
+        char *token;
+        char tm_buf[200];
+        strncpy(tm_buf, part, sizeof(tm_buf)-1);
+        tm_buf[sizeof(tm_buf)-1] = '\0';
 
-        
-//         if (strcmp(p.pname, patientName) == 0) {
-//             patientId = p.pid;
-//             break; 
-//         }
-//     }
-//     fclose(patientFile);
+        token = strtok(tm_buf, "|");
+        if (token == NULL) continue;
+        tm.NO = atoi(token);
 
-    
-//     if (patientId != 0) {
-//         printf("\n\tPatient not found with that name. Cannot add test results.\n");
-//         exit(1);
-//     }
+        token = strtok(NULL, "|");
+        if (token == NULL) continue;
+        strncpy(tm.testName, token, sizeof(tm.testName)-1);
+        tm.testName[sizeof(tm.testName)-1] = '\0';
 
-    
-//     FILE *testFile = fopen("tdata.txt", "a");
-//     if(testFile == NULL){
-//         printf("Error: Could not open test data file for writing.\n");
-//         exit(1);
-//     }
-    
-//     struct TestResult test;
-//     test.patientId = patientId; 
-    
-//     printf("\tTest Name: ");
-//     fgets(test.testName, sizeof(test.testName), stdin);
-//     strtok(test.testName, "\n");
-    
-    
-//     strcpy(test.testResult, "N/A");
-    
-//     fprintf(testFile, "%d|%s|%s\n", test.patientId, test.testName, test.testResult);
-//     printf("\tTest result added successfully for patient %s (ID: %d).\n", patientName, test.patientId);
-    
-//     fclose(testFile);
-// }
+        token = strtok(NULL, "\n");
+        if (token == NULL) continue;
+        tm.testprice = atoi(token);
+
+        printf("\t%d\t%s\t%d Taka\n", tm.NO, tm.testName, tm.testprice);
+    }
 
 
+    while (1) {
+        int a;
+        printf("\tSelect a number to add test to patient (Enter 0 to finish): ");
+        if (scanf("%d", &a) != 1) {
+            printf("\tInvalid input. Try again.\n");
+            while (getchar() != '\n') ;
+            continue;
+        }
+        getchar();
+        if (a == 0) break;
+
+        rewind(testmanual);
+        int matched = 0;
+        while (fgets(part, sizeof(part), testmanual)) {
+            char *token;
+            char tm_buf[200];
+            strncpy(tm_buf, part, sizeof(tm_buf)-1);
+            tm_buf[sizeof(tm_buf)-1] = '\0';
+
+            token = strtok(tm_buf, "|");
+            if (token == NULL) continue;
+            tm.NO = atoi(token);
+
+            token = strtok(NULL, "|");
+            if (token == NULL) continue;
+            strncpy(tm.testName, token, sizeof(tm.testName)-1);
+            tm.testName[sizeof(tm.testName)-1] = '\0';
+
+            token = strtok(NULL, "\n");
+            if (token == NULL) continue;
+            tm.testprice = atoi(token);
+
+            if (tm.NO == a) {
+                fprintf(testFile, "%d|%s|N/A|%d\n", id, tm.testName, tm.testprice);
+                matched = 1;
+                printf("\tAdded test '%s' (%d Taka) to patient %d.\n", tm.testName, tm.testprice, id);
+                break;
+            }
+        }
+
+        if (!matched) {
+            printf("\tTest number %d not found. Try again.\n", a);
+        }
+    }
+
+    fclose(testFile);
+    fclose(testmanual);
+
+    printf("\tTests are added successfully\n");
+}
+
+
+void addpatienttestresult(){
+    system("cls");
+    int id;
+    int found = 0; 
+    
+    printf("\n\t--- Add New Patient Test Result ---\n\n");
+    printf("\tEnter Patient ID to find: ");
+    scanf("%d", &id);
+    getchar();
+
+
+    FILE *testFile = fopen("tdata.txt", "r");
+    if(testFile == NULL){
+        printf("Error: Could not open test data file for writing.\n");
+        fclose(testFile);
+        exit(1);
+    }
+
+    FILE *temp = fopen("temp.txt", "w");
+    if(testFile == NULL){
+        printf("Error: Could not open file.\n");
+        fclose(temp);
+        exit(1);
+    }
+
+
+    struct TestResult pt;
+    char line[50];
+
+    while (fgets(line, sizeof(line), testFile)) {
+        char *pdata = strtok(line, "|");
+        if (pdata == NULL) continue;
+        pt.patientId = atoi(pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL) continue;
+        strcpy(pt.testName, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL) continue;
+        strcpy(pt.testResult, pdata);
+
+        pdata = strtok(NULL, "\n");
+        if (pdata == NULL) continue;
+        pt.testprice = atoi(pdata);
+
+        if(id == pt.patientId){
+            found=1;
+            printf("\tEnter test result:\n");
+            printf("\tTest %s : ",pt.testName);
+            fgets(pt.testResult, sizeof(pt.testResult),stdin);
+            strtok(pt.testResult, "\n");
+        }
+
+        fprintf(temp,"%d|%s|%s|%d\n", pt.patientId, pt.testName, pt.testResult , pt.testprice);
+    }
+
+    fclose(testFile);
+    fclose(temp);
+
+    remove("tdata.txt");
+    rename("temp.txt", "tdata.txt");
+
+    if (found) {
+        printf("\tTest Result added sucessfully.\n");
+    }else{
+        printf("\tPatient Id not found.\n");
+    }
+}
 
     
-// void viewpatienttests(){
+void viewpatienttests(){
      
-//      system("cls");
-
+    system("cls");
+    int id;
+    int found = 0; 
     
-//     char patientName[150];
-//     int patientId = -1; 
+    printf("\tEnter Patient ID to View Test Report: ");
+    scanf("%d", &id);
+    getchar();
 
-//     printf("\tEnter Patient Name to view test results: ");
-//     fgets(patientName, sizeof(patientName), stdin);
-//     strtok(patientName, "\n");
+    FILE *fileforpatient = fopen("hdata.txt", "r");
+    if (fileforpatient == NULL) {
+        printf("Error: Patient records not found. Cannot add test results.\n");
+        fclose(fileforpatient);
+        exit(1);
+    }
 
+    struct Patient point;
+    char line[1024];
+
+    while (fgets(line, sizeof(line), fileforpatient)) {
+        char *pdata = strtok(line, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        point.pid = atoi(pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pname, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        point.page = atoi(pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pgender, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pphone, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.paddress, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pbloodgroup, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pdisease, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.phistory, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        point.docid = atoi(pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pdoctor, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.padmitdate, pdata);
+
+        pdata = strtok(NULL, "\n");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pdischaredate, pdata);
+
+        if (point.pid == id) {
+            found = 0;
+            printf("\n\t--- Patient Data ---\n");
+            printf("\tID             : %d\n", point.pid);
+            printf("\tName           : %s", point.pname);
+            printf("\tAge            : %d", point.page);
+            printf("\tGender         : %s\n", point.pgender);
+            printf("\tPhone          : %s", point.pphone);
+            printf("\tAddress        : %s\n", point.paddress);
+            printf("\tBlood Group    : %s", point.pbloodgroup);
+            printf("\tDoctor         : %s\n", point.pdoctor);
+            break;
+        }
+    }
+
+    if (found) {
+        printf("\tPatient not found. Cannot add test results.\n");
+        fclose(fileforpatient);
+        exit(1);
+    }
     
-//     FILE *patientFile = fopen("hdata.txt", "r");
-//     if (patientFile == NULL) {
-//         printf("\tPatient records not found.\n");
-//         return;
-//     }
+    fclose(fileforpatient);
 
-//     struct Patient p;
-//     char line[1024];
+    FILE *testFile = fopen("tdata.txt", "r");
+    if(testFile == NULL){
+        printf("Error: Could not open test data file.\n");
+        fclose(testFile);
+        exit(1);
+    }
 
-    
-//     while (fgets(line, sizeof(line), patientFile)) {
-//         char *pdata = strtok(line, "|");
-//         if (pdata == NULL) continue;
-//         p.pid = atoi(pdata);
-        
-//         pdata = strtok(NULL, "|");
-//         if (pdata == NULL) continue;
-//         strcpy(p.pname, pdata);
 
-       
-//         if (strcmp(p.pname, patientName) == 0) {
-//             patientId = p.pid;
-//             break; 
-//         }
-//     }
-//     fclose(patientFile);
+    struct TestResult pt;
+    char part[200];
+    int a=1, totalprice=0;;
 
-//     if (patientId != 0) {
-//         printf("\n\tPatient not found with that name.\n");
-//         exit(1);
-//     }
+    printf("\t -----------Tests------------   \n");
+    printf("\tTest No: \tTest Name: \tTest Result: \tTest Price\n");
+    while (fgets(part, sizeof(part), testFile)) {
+        char *pdata = strtok(part, "|");
+        if (pdata == NULL) continue;
+        pt.patientId = atoi(pdata);
 
-    
-//     FILE *testFile = fopen("tdata.txt", "r");
-//     if (testFile == NULL) {
-//         printf("\tNo patient test records found.\n");
-//         exit(1);
-//     }
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL) continue;
+        strcpy(pt.testName, pdata);
 
-//     int found_tests = 0;
-//     struct TestResult test;
-//     int count = 0;
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL) continue;
+        strcpy(pt.testResult, pdata);
 
-//     printf("\n\t====== Test Results for Patient: %s ======\n", patientName);
+        pdata = strtok(NULL, "\n");
+        if (pdata == NULL) continue;
+        pt.testprice = atoi(pdata);
 
-    
-//     while (fgets(line, sizeof(line), testFile)) {
-//         char *tdata = strtok(line, "|");
-//         if (tdata == NULL) continue;
-//         test.patientId = atoi(tdata);
-        
-//         tdata = strtok(NULL, "|");
-//         if (tdata == NULL) continue;
-//         strcpy(test.testName, tdata);
-        
-//         tdata = strtok(NULL, "\n");
-//         if (tdata == NULL) continue;
-//         strcpy(test.testResult, tdata);
+        if(id == pt.patientId){
+            found=1;
+            printf("\t%d \t%s \t%s \t%d\n", a++, pt.testName, pt.testResult, pt.testprice);
+            totalprice += pt.testprice;
+        }
 
-//         if (test.patientId == patientId) {
-//             found_tests = 1;
-//             printf("\n\t--- Test %d ---\n", ++count);
-//             printf("\tTest Name:   %s\n", test.testName);
-//             printf("\tTest Result: %s\n", test.testResult);
-//         }
-//     }
+    }
 
-//     fclose(testFile);
+    fclose(testFile);
 
-//     if (found_tests == 0) {
-//         printf("\n\tNo test results found for patient: %s.\n", patientName);
-//     }
-// }
+    if(found){
+        printf("\t \t \t total price: %d\n", totalprice);
+    }else{
+        printf("\tPatient Id not found.\n");
+    }
+
+}
 
 
 

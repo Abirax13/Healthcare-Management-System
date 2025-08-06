@@ -1,0 +1,27 @@
+01|CBC ( Without Platelets & RBC)|1000
+02|Hb|200
+03|TC, DC, ESR, HB|1500
+04|ESR|300
+05|BT, CT|300
+06|S. Glucose|600
+07|RBS|600
+08|FBS|600
+09|PPBS|1200
+10|OGTT|1500
+11|S. Creatinine|500
+12|S. Albumin|1000
+13|S. Uric Acid|1000
+14|S. Bilirubin|600
+15|S. ALT/SGPT|700
+16|Blood Grouping & Rh Typing|500
+17|Widal (Set)|800
+18|ASO Reagent|1000
+19|C-Reactive Protein|1500
+20|VDRL|500
+21|Dengue for NS1|500
+22|HBsAg|1500
+23|MT (test)|1000
+24|Urine for R/M/E|200
+25|Urine for Albumin (Heat Coagulation test)|200
+26|Urine for Sugar(Benedict test)|200
+27|Urine For Pregnancy test|800
