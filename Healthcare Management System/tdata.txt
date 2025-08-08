@@ -1,1 +1,1 @@
-24235339|CBC ( Without Platelets & RBC|positive|1000
+24235339|CBC |positive|1000

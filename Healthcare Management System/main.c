@@ -109,14 +109,14 @@ void deleteprescription(int id);
 void login(){
     while(1){
         system("cls");
-        printf("\n\t====== Healthcare Management System ======\n\n");
-        printf("\n\t=============== Login Page ===============\n\n");
-        printf("\t1. Login as Administrator\n");
+        printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
+        printf("\n\t============================== Login Page ==============================\n\n");
+        printf("\n\t1. Login as Administrator\n");
         printf("\t2. Login as Doctor\n");
         printf("\t3. Login as Receptionist\n");
         printf("\t0. Exit Program\n");
         
-        printf("\t Enter a number to Login as : ");
+        printf("\n\tEnter a number to Login as : ");
         int a;
         scanf("%d", &a);
         getchar();
@@ -135,6 +135,8 @@ void login(){
 
 
 void Authentication(int a) {
+    system("cls");
+    printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
     int attempts = 0;
     FILE *userlogin = fopen("login.txt", "r");
     if (userlogin == NULL) {
@@ -146,7 +148,7 @@ void Authentication(int a) {
         char userid[15];
         char userpass[30];
 
-        printf("\n\tLogin Page\n\n");
+        printf("\n\t============================== Login Page ==============================\n\n");
 
         printf("\tUser Name : ");
         fgets(userid, sizeof(userid), stdin);
@@ -229,19 +231,19 @@ void Authentication(int a) {
 void Administrator(){
     int select;
     while(1){
-        printf("\n\t====== Healthcare Management System ======\n\n");
-        printf("\t1.  Add New Patient\n");
-        printf("\t2.  View All Patients\n");
-        printf("\t3.  Search Patient by ID\n");
-        printf("\t4.  Update Patient\n");
-        printf("\t5.  Delete Patient\n");
-        printf("\t6.  Assign Doctor\n");
-        printf("\t7.  Add New Doctor\n");
-        printf("\t8.  View All Doctor\n");
-        printf("\t9.  Delete Doctor\n");
-        printf("\t10. View All Patient Under a Doctor\n");
-        printf("\t11. Input New User.\n");
-        printf("\t12. Delete User.\n");
+        printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
+        printf("\n\t1.  Input New User.\n");
+        printf("\t2.  Delete User.\n");
+        printf("\t3.  Add New Doctor.\n");
+        printf("\t4.  View All Doctor.\n");
+        printf("\t5.  Delete Doctor.\n");
+        printf("\t6.  Add New Patient.\n");
+        printf("\t7.  View All Patients.\n");
+        printf("\t8.  Search Patient by ID.\n");
+        printf("\t9.  Update Patient.\n");
+        printf("\t10. Delete Patient.\n");
+        printf("\t11. Assign Doctor.\n");
+        printf("\t12. View All Patient Under a Doctor.\n");
         printf("\t13. Add Apointment.\n");
         printf("\t14. Pescribe a Patient.\n");
         printf("\t15. View Prescription.\n");
@@ -249,35 +251,35 @@ void Administrator(){
         printf("\t17. Add Patient Test.\n");
         printf("\t18. Add Patient Result\n");
         printf("\t19. View Patient Test Report.\n");
-        printf("\t0. Log Out\n");
-        printf("\tEnter your choice: ");
+        printf("\t0. Log Out.\n");
+        printf("\n\tEnter your choice: ");
         scanf("%d", &select);
         getchar();
 
 
-        if(select==1){
+        if(select==6){
             addpatient();
-        }else if(select==2){
-            allpatients();
-        }else if(select==3){
-            searchpatient();
-        }else if(select==4){
-            updatepatient();
-        }else if(select==5){
-            deletepatient();
-        }else if(select==6){
-            assigndoctor();
         }else if(select==7){
-            adddoctors();
+            allpatients();
         }else if(select==8){
-            alldoctors();
+            searchpatient();
         }else if(select==9){
-            deletedoctor();
+            updatepatient();
         }else if(select==10){
-            doctorasignp();
+            deletepatient();
         }else if(select==11){
-            addlogin();
+            assigndoctor();
+        }else if(select==3){
+            adddoctors();
+        }else if(select==4){
+            alldoctors();
+        }else if(select==5){
+            deletedoctor();
         }else if(select==12){
+            doctorasignp();
+        }else if(select==1){
+            addlogin();
+        }else if(select==2){
             deletelogin();
         }else if(select==13){
             doctorsappointment();
@@ -296,7 +298,7 @@ void Administrator(){
         }else if(select==0){
             return;
         }else{
-            printf("\tinvalid selection");
+            printf("\n\tinvalid selection");
         }
     }
 }
@@ -304,16 +306,16 @@ void Administrator(){
 void doctorlogin(){
     int select;
     while(1){
-        printf("\n\t====== Healthcare Management System ======\n\n");
-        printf("\t1.  View All Patients\n");
-        printf("\t2.  Search Patient by ID\n");
-        printf("\t3.  Update Patient\n");
+        printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
+        printf("\n\t1.  View All Patients.\n");
+        printf("\t2.  Search Patient by ID.\n");
+        printf("\t3.  Update Patient.\n");
         printf("\t4.  View apointment Patient details.\n");
         printf("\t5.  Pescribe a Patient.\n");
         printf("\t6.  Add Patient Test.\n");
         printf("\t7.  View Patient Test Report.\n");
-        printf("\t0. Log Out\n");
-        printf("\tEnter your choice: ");
+        printf("\t0.  Log Out.\n");
+        printf("\n\tEnter your choice: ");
         scanf("%d", &select);
         getchar();
 
@@ -342,33 +344,29 @@ void doctorlogin(){
             case 0:
                 return;
             default:
-            printf("\tinvalid selection");
+            printf("\n\tinvalid selection");
          }
     }
 }
-
-void addpatienttest();
-void addpatienttestresult();
-void viewpatienttests();
 
 
 void Receptionist(){
     int select;
     while(1){
-        printf("\n\t====== Healthcare Management System ======\n\n");
-        printf("\t1.  Add New Patient\n");
-        printf("\t2.  View All Patients\n");
-        printf("\t3.  Search Patient by ID\n");
-        printf("\t4.  Update Patient\n");
-        printf("\t5.  Delete Patient\n");
-        printf("\t6.  Assign Doctor\n");
+        printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
+        printf("\n\t1.  Add New Patient.\n");
+        printf("\t2.  View All Patients.\n");
+        printf("\t3.  Search Patient by ID.\n");
+        printf("\t4.  Update Patient.\n");
+        printf("\t5.  Delete Patient.\n");
+        printf("\t6.  Assign Doctor.\n");
         printf("\t7.  Add Apointment.\n");
         printf("\t8.  View Prescription.\n");
         printf("\t9.  Delete Appointment.\n");
         printf("\t10. Add Test Result.\n");
         printf("\t11. View Test Report.\n");
-        printf("\t0. Log Out\n");
-        printf("\tEnter your choice: ");
+        printf("\t0.  Log Out\n");
+        printf("\n\tEnter your choice: ");
         scanf("%d", &select);
         getchar();
 
@@ -406,15 +404,110 @@ void Receptionist(){
 
 void addpatient() {
     system("cls");
+    
 
     FILE *fileforpatient = fopen("hdata.txt", "a");
 
+    FILE *filep = fopen("hdata.txt", "r");
 
+    struct Patient point;
     struct Patient p;
-    printf("\n\t--- Enter New Patient Data ---\n\n");
+    char line[1000];
+
+
+    printf("\n\t==========------------- Enter New Patient Data -------------==========\n\n");
     printf("\tPatient ID: ");
     scanf("%d", &p.pid);
     getchar();
+
+    while (fgets(line, sizeof(line), filep)) {
+        char *pdata = strtok(line, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        point.pid = atoi(pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pname, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        point.page = atoi(pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pgender, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pphone, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.paddress, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pbloodgroup, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pdisease, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.phistory, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        point.docid = atoi(pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pdoctor, pdata);
+
+        pdata = strtok(NULL, "|");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.padmitdate, pdata);
+
+        pdata = strtok(NULL, "\n");
+        if (pdata == NULL){
+            continue;
+        }
+        strcpy(point.pdischaredate, pdata);
+
+        if(point.pid == p.pid){
+            printf("\tThe input id already exist. Enter a valid id.\n");
+            fclose(fileforpatient);
+            fclose(filep);
+            return;
+        }
+
+    }
+
 
     printf("\tPatient Name: ");
     fgets(p.pname, sizeof(p.pname), stdin);
@@ -456,8 +549,24 @@ void addpatient() {
     strcpy(p.pdoctor, "Unassigned");
     p.docid=000000;
 
+    if (strlen(p.pphone) < 11) {
+        printf("\tInvalid phone number.\n");
+        fclose(filep);
+        fclose(fileforpatient);
+        return;
+    }
+
+    if(p.pname== NULL){
+        printf("\tinvalid Name\n");
+        fclose(filep);
+        fclose(fileforpatient);
+        return;
+    }
+
+
     fprintf(fileforpatient, "%d|%s|%d|%s|%s|%s|%s|%s|%s|%d|%s|%s|%s\n", p.pid, p.pname, p.page, p.pgender, p.pphone, p.paddress, p.pbloodgroup, p.pdisease, p.phistory, p.docid, p.pdoctor, p.padmitdate, p.pdischaredate);
 
+    fclose(filep);
     fclose(fileforpatient);
     printf("\tPatient added successfully.\n");
 }
@@ -467,6 +576,7 @@ void addpatient() {
 
 void allpatients() {
     system("cls");
+    printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
 
     FILE *fileforpatient = fopen("hdata.txt", "r");
     if (fileforpatient == NULL) {
@@ -478,7 +588,7 @@ void allpatients() {
     int count = 0;
     char line[1024];
 
-    printf("\n\t====== All Patient Records ======\n");
+    printf("\n\t========================== All Patient Records ==========================\n");
 
     while (fgets(line, sizeof(line), fileforpatient)) {
         char *pdata = strtok(line, "|");
@@ -559,19 +669,19 @@ void allpatients() {
         }
         strcpy(point.pdischaredate, pdata);
 
-        printf("\n\t--- Patient %d ---\n", ++count);
-        printf("\tID             : %d\n", point.pid);
-        printf("\tName           : %s\n", point.pname);
-        printf("\tAge            : %d\n", point.page);
-        printf("\tGender         : %s\n", point.pgender);
-        printf("\tPhone          : %s\n", point.pphone);
-        printf("\tAddress        : %s\n", point.paddress);
-        printf("\tBlood Group    : %s\n", point.pbloodgroup);
-        printf("\tDisease        : %s\n", point.pdisease);
-        printf("\tMedical History: %s\n", point.phistory);
-        printf("\tDoctor         : %s\n", point.pdoctor);
-        printf("\tAdmit Date     : %s\n", point.padmitdate);
-        printf("\tDischarge Date : %s\n", point.pdischaredate);
+        printf("\n\t====================--- Patient %d ---====================\n", ++count);
+        printf("\tID                   : %d\n", point.pid);
+        printf("\tName                 : %s\n", point.pname);
+        printf("\tAge                  : %d\n", point.page);
+        printf("\tGender               : %s\n", point.pgender);
+        printf("\tPhone                : %s\n", point.pphone);
+        printf("\tAddress              : %s\n", point.paddress);
+        printf("\tBlood Group          : %s\n", point.pbloodgroup);
+        printf("\tDisease              : %s\n", point.pdisease);
+        printf("\tMedical History      : %s\n", point.phistory);
+        printf("\tDoctor               : %s\n", point.pdoctor);
+        printf("\tAdmit Date           : %s\n", point.padmitdate);
+        printf("\tDischarge Date       : %s\n", point.pdischaredate);
     }
 
     fclose(fileforpatient);
@@ -580,6 +690,8 @@ void allpatients() {
 
 void searchpatient() {
     system("cls");
+
+    printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
 
     int id, found = 1;
 
@@ -676,19 +788,19 @@ void searchpatient() {
 
         if (point.pid == id) {
             found = 0;
-            printf("\n\t--- Patient Found ---\n");
-            printf("\tID             : %d\n", point.pid);
-            printf("\tName           : %s\n", point.pname);
-            printf("\tAge            : %d\n", point.page);
-            printf("\tGender         : %s\n", point.pgender);
-            printf("\tPhone          : %s\n", point.pphone);
-            printf("\tAddress        : %s\n", point.paddress);
-            printf("\tBlood Group    : %s\n", point.pbloodgroup);
-            printf("\tDisease        : %s\n", point.pdisease);
-            printf("\tMedical History: %s\n", point.phistory);
-            printf("\tDoctor         : %s\n", point.pdoctor);
-            printf("\tAdmit Date     : %s\n", point.padmitdate);
-            printf("\tDischarge Date : %s\n", point.pdischaredate);
+            printf("\n\t======================--- Patient Found ---====================\n");
+            printf("\tID                   : %d\n", point.pid);
+            printf("\tName                 : %s\n", point.pname);
+            printf("\tAge                  : %d\n", point.page);
+            printf("\tGender               : %s\n", point.pgender);
+            printf("\tPhone                : %s\n", point.pphone);
+            printf("\tAddress              : %s\n", point.paddress);
+            printf("\tBlood Group          : %s\n", point.pbloodgroup);
+            printf("\tDisease              : %s\n", point.pdisease);
+            printf("\tMedical History      : %s\n", point.phistory);
+            printf("\tDoctor               : %s\n", point.pdoctor);
+            printf("\tAdmit Date           : %s\n", point.padmitdate);
+            printf("\tDischarge Date       : %s\n", point.pdischaredate);
             break;
         }
     }
@@ -995,6 +1107,7 @@ void deletepatient() {
 
 void assigndoctor() {
     system("cls");
+    printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
 
     FILE *fileforpatient = fopen("hdata.txt", "r");
     if (fileforpatient == NULL) {
@@ -1194,6 +1307,8 @@ void assigndoctor() {
 
 void adddoctors(){
     system("cls");
+
+    
     FILE *filefordoctor;
     filefordoctor= fopen("ddata.txt", "a");
     
@@ -1204,7 +1319,7 @@ void adddoctors(){
     }
 
 
-    printf("\n\t--- Enter New Doctor Data ---\n\n");
+    printf("\n\t------------- Enter New Doctor Data -------------\n\n");
     printf("\tDoctor ID: ");
     scanf("%d", &d.did);
     getchar();
@@ -1247,7 +1362,7 @@ void adddoctors(){
 
 void alldoctors(){
     system("cls");
-
+    printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
     FILE *filefordoctor = fopen("ddata.txt", "r");
     if (filefordoctor == NULL) {
         printf("\tNo Doctor records found.\n");
@@ -1258,7 +1373,7 @@ void alldoctors(){
     int count = 0;
     char line[1024];
 
-    printf("\n\t====== All Doctors Records ======\n");
+    printf("\n\t=========================== All Doctors Records ===========================\n");
 
     while (fgets(line, sizeof(line), filefordoctor)) {
         char *ddata = strtok(line, "|");
@@ -1310,15 +1425,15 @@ void alldoctors(){
         strcpy(point.daddress, ddata);
 
 
-        printf("\n\t--- Doctor %d ---\n", ++count);
-        printf("\tID                : %d\n", point.did);
-        printf("\tName              : %s\n", point.dname);
-        printf("\tGender            : %s\n", point.dgender);
-        printf("\tSpecialize        : %s\n", point.dspesalized);
-        printf("\tRoom No           : %s\n", point.droom);
-        printf("\tTime Schedule     : %s\n", point.dtimetable);
-        printf("\tContact           : %s\n", point.dcontact);
-        printf("\tAddress           : %s\n", point.daddress);
+        printf("\n\t-----=====-----=====-----===== Doctor %d =====-----=====-----=====------\n", ++count);
+        printf("\tID                     : %d\n", point.did);
+        printf("\tName                   : %s\n", point.dname);
+        printf("\tGender                 : %s\n", point.dgender);
+        printf("\tSpecialize             : %s\n", point.dspesalized);
+        printf("\tRoom No                : %s\n", point.droom);
+        printf("\tTime Schedule          : %s\n", point.dtimetable);
+        printf("\tContact                : %s\n", point.dcontact);
+        printf("\tAddress                : %s\n", point.daddress);
     }
 
     fclose(filefordoctor);
@@ -1429,8 +1544,8 @@ void doctorasignp() {
     system("cls");
     int doctor_id;
     int found = 0;
-
-    printf("\tEnter Doctor's ID to view assigned patients: ");
+    printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
+    printf("\n\tEnter Doctor's ID to view assigned patients: ");
     scanf("%d", &doctor_id);
     getchar();
 
@@ -1444,7 +1559,7 @@ void doctorasignp() {
     char line[1024];
     int count = 0;
 
-    printf("\n\t====== Patients Assigned to Doctor ID: %d ======\n", doctor_id);
+    printf("\n\t=============== Patients Assigned to Doctor ID: %d ===============\n", doctor_id);
 
     while (fgets(line, sizeof(line), fileforpatient)) {
         char *pdata = strtok(line, "|");
@@ -1502,19 +1617,19 @@ void doctorasignp() {
 
         if (point.docid == doctor_id) {
             found = 1;
-            printf("\n\t--- Patient %d ---\n", ++count);
-            printf("\tID             : %d\n", point.pid);
-            printf("\tName           : %s\n", point.pname);
-            printf("\tAge            : %d\n", point.page);
-            printf("\tGender         : %s\n", point.pgender);
-            printf("\tPhone          : %s\n", point.pphone);
-            printf("\tAddress        : %s\n", point.paddress);
-            printf("\tBlood Group    : %s\n", point.pbloodgroup);
-            printf("\tDisease        : %s\n", point.pdisease);
-            printf("\tMedical History: %s\n", point.phistory);
-            printf("\tDoctor Name    : %s\n", point.pdoctor);
-            printf("\tAdmit Date     : %s\n", point.padmitdate);
-            printf("\tDischarge Date : %s\n", point.pdischaredate);
+            printf("\n\t=================------------- Patient %d -------------=================\n\n", ++count);
+            printf("\tID                   : %d\n", point.pid);
+            printf("\tName                 : %s\n", point.pname);
+            printf("\tAge                  : %d\n", point.page);
+            printf("\tGender               : %s\n", point.pgender);
+            printf("\tPhone                : %s\n", point.pphone);
+            printf("\tAddress              : %s\n", point.paddress);
+            printf("\tBlood Group          : %s\n", point.pbloodgroup);
+            printf("\tDisease              : %s\n", point.pdisease);
+            printf("\tMedical History      : %s\n", point.phistory);
+            printf("\tDoctor Name          : %s\n", point.pdoctor);
+            printf("\tAdmit Date           : %s\n", point.padmitdate);
+            printf("\tDischarge Date       : %s\n", point.pdischaredate);
         }
     }
 
@@ -1628,15 +1743,15 @@ void addpatienttest(){
 
         if (point.pid == id) {
             found = 0;
-            printf("\n\t--- Patient Found ---\n");
-            printf("\tID             : %d\n", point.pid);
-            printf("\tName           : %s\n", point.pname);
-            printf("\tAge            : %d\n", point.page);
-            printf("\tGender         : %s\n", point.pgender);
-            printf("\tPhone          : %s\n", point.pphone);
-            printf("\tAddress        : %s\n", point.paddress);
-            printf("\tBlood Group    : %s\n", point.pbloodgroup);
-            printf("\tDoctor         : %s\n", point.pdoctor);
+            printf("\n\t====================--- Patient Found ---=======================\n");
+            printf("\tID                  : %d\n", point.pid);
+            printf("\tName                : %s\n", point.pname);
+            printf("\tAge                 : %d\n", point.page);
+            printf("\tGender              : %s\n", point.pgender);
+            printf("\tPhone               : %s\n", point.pphone);
+            printf("\tAddress             : %s\n", point.paddress);
+            printf("\tBlood Group         : %s\n", point.pbloodgroup);
+            printf("\tDoctor              : %s\n", point.pdoctor);
             break;
         }
     }
@@ -1664,7 +1779,7 @@ void addpatienttest(){
     struct testmenu tm;
     char part[200];
 
-    printf("\t -----------Test Menu------------\n");
+    printf("\t -----===========-----------Test Menu------------===========-----\n");
     printf("\tTest No:\tTest Name:\tTest Price\n");
     while (fgets(part, sizeof(part), testmanual)) {
         char *token;
@@ -1746,7 +1861,7 @@ void addpatienttestresult(){
     int id;
     int found = 0; 
     
-    printf("\n\t--- Add New Patient Test Result ---\n\n");
+    printf("\n\t===========--- Add New Patient Test Result ---===========\n\n");
     printf("\tEnter Patient ID to find: ");
     scanf("%d", &id);
     getchar();
@@ -1815,10 +1930,12 @@ void addpatienttestresult(){
 void viewpatienttests(){
      
     system("cls");
+
+printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
     int id;
     int found = 0; 
     
-    printf("\tEnter Patient ID to View Test Report: ");
+    printf("\n\tEnter Patient ID to View Test Report: ");
     scanf("%d", &id);
     getchar();
 
@@ -1913,15 +2030,15 @@ void viewpatienttests(){
 
         if (point.pid == id) {
             found = 0;
-            printf("\n\t--- Patient Data ---\n");
-            printf("\tID             : %d\n", point.pid);
-            printf("\tName           : %s", point.pname);
-            printf("\tAge            : %d", point.page);
-            printf("\tGender         : %s\n", point.pgender);
-            printf("\tPhone          : %s", point.pphone);
-            printf("\tAddress        : %s\n", point.paddress);
-            printf("\tBlood Group    : %s", point.pbloodgroup);
-            printf("\tDoctor         : %s\n", point.pdoctor);
+            printf("\n\t=========================--- Patient Data ---=========================\n");
+            printf("\tID                  : %d\n", point.pid);
+            printf("\tName                : %s\n", point.pname);
+            printf("\tAge                 : %d\n", point.page);
+            printf("\tGender              : %s\n", point.pgender);
+            printf("\tPhone               : %s\n", point.pphone);
+            printf("\tAddress             : %s\n", point.paddress);
+            printf("\tBlood Group         : %s\n", point.pbloodgroup);
+            printf("\tDoctor              : %s\n", point.pdoctor);
             break;
         }
     }
@@ -1946,7 +2063,7 @@ void viewpatienttests(){
     char part[200];
     int a=1, totalprice=0;;
 
-    printf("\t -----------Tests------------   \n");
+    printf("\t --------------------------------Tests---------------------------------\n");
     printf("\tTest No: \tTest Name: \tTest Result: \tTest Price\n");
     while (fgets(part, sizeof(part), testFile)) {
         char *pdata = strtok(part, "|");
@@ -1967,7 +2084,7 @@ void viewpatienttests(){
 
         if(id == pt.patientId){
             found=1;
-            printf("\t%d \t%s \t%s \t%d\n", a++, pt.testName, pt.testResult, pt.testprice);
+            printf("\t \t%d \t%s\t \t%s \t%d\n", a++, pt.testName, pt.testResult, pt.testprice);
             totalprice += pt.testprice;
         }
 
@@ -1976,7 +2093,7 @@ void viewpatienttests(){
     fclose(testFile);
 
     if(found){
-        printf("\t \t \t total price: %d\n", totalprice);
+        printf("\t \t \t \t \t \ttotal cost: %d\n", totalprice);
     }else{
         printf("\tPatient Id not found.\n");
     }
@@ -1995,7 +2112,7 @@ void doctorsappointment(){
     }
 
     struct dapoint a;
-    printf("\n\t--- Enter New Appointment ---\n\n");
+    printf("\n\t======-------------- Enter New Appointment -------------======\n\n");
     printf("\tDoctors ID: ");
     scanf("%d", &a.did);
     getchar();
@@ -2090,6 +2207,8 @@ void appointmentprescription(){
 
 void viewprescription(){
     system("cls");
+
+    printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
     int id;
     printf("\n\tEnter Patient ID to view prescription: ");
     scanf("%d", &id);
@@ -2142,12 +2261,12 @@ void viewprescription(){
         a.apointnum = atoi(pdata);
 
         if(a.pid == id){
-            printf("\n\t--- Patient Details ---\n");
+            printf("\n\t===================-------- Patient Details --------===================\n");
             printf("\tPatitnt ID : %d \t \tDoctor ID  : %d\t \tApointment NO: %d\n", a.pid, a.did, a.apointnum);
-            printf("\tName           : %s\n", a.name);
-            printf("\tAge            : %d\n", a.age);
-            printf("\tGender         : %s\n", a.gender);
-            printf("\tAddress        : %s\n", a.adress);
+            printf("\tName             : %s\n", a.name);
+            printf("\tAge              : %d\n", a.age);
+            printf("\tGender           : %s\n", a.gender);
+            printf("\tAddress          : %s\n", a.adress);
             foundPatient = 0;
             break;
         }
@@ -2210,10 +2329,10 @@ void viewprescription(){
 
         if(pp.pid == id){
             foundPres=1;
-            printf("\t \t ---------------Medication---------------            \n");
-            printf("\tMedicine  -  Morning  -  Noon -  Night\n");
+            printf("\t -----------------------------Medication-----------------------------\n");
+            printf("\tMedicine  \t-  Morning  \t- Noon \t-  Night\n");
             for (int j = 0; j < pp.count; ++j) {
-                printf("\t%d %s - %s - %s - %s\n",j, pp.num[j].medi, pp.num[j].morning, pp.num[j].noon, pp.num[j].night);
+                printf("\t%d %s \t \t- %s \t- %s \t \t- %s\n",j+1, pp.num[j].medi, pp.num[j].morning, pp.num[j].noon, pp.num[j].night);
             }
 
         }
@@ -2465,13 +2584,13 @@ void deletelogin(){
         }
         strcpy(pass.userid, udata);
 
-        udata = strtok(NULL, "|");
+        udata = strtok(NULL, "\n");
         if (udata == NULL){
             continue;
         }
         strcpy(pass.passid, udata);
 
-        if(id == pass.userid){
+        if(strcmp(id, pass.userid) == 0){
             found=1;
         }else{
             fprintf(temp, "%s|%s|%s\n",pass.usertype, pass.userid, pass.passid);
@@ -2487,7 +2606,7 @@ void deletelogin(){
     if (found) {
         printf("\tUser deleted successfully.\n");
     }else{
-        printf("\tDoctor ID not found.\n");
+        printf("\tUser ID not found.\n");
     }
     
 }
