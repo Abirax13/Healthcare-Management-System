@@ -152,14 +152,14 @@ void Authentication(int a) {
 
         printf("\tUser Name : ");
         fgets(userid, sizeof(userid), stdin);
-        strtok(userid, "\n");
+        char *p_userid = strtok(userid, "\n");
 
         while (1) {
             printf("\tPassword  : ");
             fgets(userpass, sizeof(userpass), stdin);
-            strtok(userpass, "\n");
+            char *p_userpass = strtok(userpass, "\n");
 
-            if (strlen(userpass) >= 8) break;
+            if (strlen(p_userpass) >= 8) break;
             printf("\tPassword must be 8 characters or more.\n");
         }
 
@@ -182,7 +182,7 @@ void Authentication(int a) {
             if (!udata) continue;
             strcpy(user.passid, udata);
 
-            if (strcmp(userid, user.userid) == 0 && strcmp(userpass, user.passid) == 0) {
+            if (strcmp(p_userid, user.userid) == 0 && strcmp(userpass, user.passid) == 0) {
                 found = 1;
                 if (a == 1 && strcmp(user.usertype, "Administrator") == 0) {
                     system("cls");
@@ -244,7 +244,7 @@ void Administrator(){
         printf("\t10. Delete Patient.\n");
         printf("\t11. Assign Doctor.\n");
         printf("\t12. View All Patient Under a Doctor.\n");
-        printf("\t13. Add Apointment.\n");
+        printf("\t13. Add Appointment.\n");
         printf("\t14. Pescribe a Patient.\n");
         printf("\t15. View Prescription.\n");
         printf("\t16. Delete Appointment.\n");
@@ -310,7 +310,7 @@ void doctorlogin(){
         printf("\n\t1.  View All Patients.\n");
         printf("\t2.  Search Patient by ID.\n");
         printf("\t3.  Update Patient.\n");
-        printf("\t4.  View apointment Patient details.\n");
+        printf("\t4.  View appointment Patient details.\n");
         printf("\t5.  Pescribe a Patient.\n");
         printf("\t6.  Add Patient Test.\n");
         printf("\t7.  View Patient Test Report.\n");
@@ -360,7 +360,7 @@ void Receptionist(){
         printf("\t4.  Update Patient.\n");
         printf("\t5.  Delete Patient.\n");
         printf("\t6.  Assign Doctor.\n");
-        printf("\t7.  Add Apointment.\n");
+        printf("\t7.  Add Appointment.\n");
         printf("\t8.  View Prescription.\n");
         printf("\t9.  Delete Appointment.\n");
         printf("\t10. Add Test Result.\n");
