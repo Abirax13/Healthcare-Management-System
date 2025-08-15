@@ -1,1 +1,5 @@
-202500001|Dr. Md. Sobur Khan|Male|Heart Surjent|D-501|9:00 am - 10:00 pm|01301201401|DSC, Saver/ Chandpur
+202500001|Dr. Md. Imtiz Khan|Male|Heart Surjent|D-501|9:00 am - 10:00 pm|01301201401|DSC, Saver/ Chandpur
+202500002|Dr. Shamsul Alam|Male|Endocroinology|D-502|Sun-Thu 09:00am-04:00pm|011133445566|12, Green Road, Dhaka
+202500003|Dr. Kamal Uddin|Male|Infectious Diseases|D-503|Sun-Wed 02:00pm-10:00pm|01231231234|78, Banani, Dhaka
+202500004|Dr. Rehana Akter|Female|Pulmonology|D-504|Mon-Fri 10:00am-06:00pm|01233211234|45, Kazlia, Rajshahi
+202500005|Dr. Aminul Haque|Male|Orthopedics|D-505|Tue-Thu 08:00am-03:00pm|01231472589|34, Dhanmondi, Dhaka

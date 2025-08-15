@@ -1,8 +1,9 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-#include<time.h>
 #include<ctype.h>
+#include<math.h>
+
 
 int position=0;
 
@@ -1931,7 +1932,7 @@ void viewpatienttests(){
      
     system("cls");
 
-printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
+    printf("\t========================================================================\n\t----------========== Healthcare Management System ============----------\n\t========================================================================\n");
     int id;
     int found = 0; 
     
@@ -2315,16 +2316,32 @@ void viewprescription(){
             temp[sizeof(temp)-1] = '\0';
 
             char *tptr = strtok(temp, "-");
-            if (tptr) strcpy(pp.num[i].medi, tptr); else pp.num[i].medi[0] = '\0';
+            if (tptr){
+                strcpy(pp.num[i].medi, tptr);
+            }else{ 
+                pp.num[i].medi[0] = '\0';
+            }
 
             tptr = strtok(NULL, "-");
-            if (tptr) strcpy(pp.num[i].morning, tptr); else pp.num[i].morning[0] = '\0';
+            if (tptr){
+                strcpy(pp.num[i].morning, tptr);
+             }else{
+                pp.num[i].morning[0] = '\0';
+            }
 
             tptr = strtok(NULL, "-");
-            if (tptr) strcpy(pp.num[i].noon, tptr); else pp.num[i].noon[0] = '\0';
+            if (tptr){
+                strcpy(pp.num[i].noon, tptr);
+            }else{
+                pp.num[i].noon[0] = '\0';
+            }
 
-            tptr = strtok(NULL, "-");
-            if (tptr) strcpy(pp.num[i].night, tptr); else pp.num[i].night[0] = '\0';
+            tptr = strtok(NULL, "|");
+            if (tptr){
+                strcpy(pp.num[i].night, tptr);
+            }else{
+                pp.num[i].night[0] = '\0';
+            }
         }
 
         if(pp.pid == id){
@@ -2332,7 +2349,7 @@ void viewprescription(){
             printf("\t -----------------------------Medication-----------------------------\n");
             printf("\tMedicine  \t-  Morning  \t- Noon \t-  Night\n");
             for (int j = 0; j < pp.count; ++j) {
-                printf("\t%d %s \t \t- %s \t- %s \t \t- %s\n",j+1, pp.num[j].medi, pp.num[j].morning, pp.num[j].noon, pp.num[j].night);
+                printf("\t%d %s  \t- %s \t- %s  \t- %s\n",j+1, pp.num[j].medi, pp.num[j].morning, pp.num[j].noon, pp.num[j].night);
             }
 
         }
@@ -2344,6 +2361,8 @@ void viewprescription(){
 
     fclose(presFile);
 }
+
+
 
 void deleteappointment(){
     system("cls");

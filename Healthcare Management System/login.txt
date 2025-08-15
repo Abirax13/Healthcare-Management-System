@@ -1,3 +1,6 @@
 Administrator|Abir209|Abir209a
 Doctor|Rakib339|Rakib339
 Receptionist|Antor146|Antor146
+Administrator|admin123|admin123
+Doctor|admin123|admin123
+Receptionist|admin123|admin123

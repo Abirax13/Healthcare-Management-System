@@ -1,2 +1,10 @@
-24235120|6419832|napa-1 tablet-none-1 tablet
-
+24235344|1|Paracetamol-1 tab-1 tab-0
+24235345|2|Amoxicillin-500mg-500mg-500mg|Ibuprofen-200mg-0-200mg
+24235346|3|Cetirizine-1 tab-0-1 tab|Paracetamol-1 tab-1 tab-1 tab|Omeprazole-20mg-0-20mg
+24235347|1|Metformin-500mg-0-500mg
+24235348|2|Azithromycin-500mg-500mg-0|Vitamin C-500mg-500mg-500mg
+24235349|4|Cough Syrup-10ml-10ml-10ml|Paracetamol-500mg-500mg-500mg|Loratadine-10mg-0-10mg|ORS-1 packet-1 packet-1 packet
+24235350|1|Ibuprofen-200mg-200mg-0
+24235351|2|Amoxicillin-500mg-0-500mg|Cefixime-200mg-0-200mg
+24235352|3|Omeprazole-20mg-20mg-20mg|Sucralfate-10ml-10ml-10ml|Paracetamol-500mg-0-500mg
+24235353|2|Antacid-2 tab-2 tab-2 tab|Vitamin D-1 tab-0-1 tab
